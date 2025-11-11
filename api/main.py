@@ -37,7 +37,7 @@ def download_models_from_supabase():
     print("🔄 Downloading models from Supabase Storage...")
     
     supabase_url = os.getenv("SUPABASE_URL")
-    supabase_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")  # chiave privata
+    supabase_key = os.getenv("SUPABASE_SERVICE_KEY")  # chiave privata
     
     if not supabase_url or not supabase_key:
         raise ValueError("SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY mancanti")
