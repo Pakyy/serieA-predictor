@@ -1,0 +1,41 @@
+{
+  "features": [
+    "home_elo_before",
+    "away_elo_before",
+    "elo_diff",
+    "home_form_5",
+    "away_form_5",
+    "form_diff",
+    "home_goals_avg_5",
+    "away_goals_avg_5",
+    "home_conceded_avg_5",
+    "away_conceded_avg_5",
+    "home_shots_avg_5",
+    "away_shots_avg_5",
+    "home_xG_avg_rolling",
+    "away_xG_avg_rolling",
+    "home_xGA_avg_rolling",
+    "away_xGA_avg_rolling"
+  ],
+  "n_features": 16,
+  "base_features": [
+    "home_elo_before",
+    "away_elo_before",
+    "elo_diff",
+    "home_form_5",
+    "away_form_5",
+    "form_diff",
+    "home_goals_avg_5",
+    "away_goals_avg_5",
+    "home_conceded_avg_5",
+    "away_conceded_avg_5",
+    "home_shots_avg_5",
+    "away_shots_avg_5"
+  ],
+  "xg_features": [
+    "home_xG_avg_rolling",
+    "away_xG_avg_rolling",
+    "home_xGA_avg_rolling",
+    "away_xGA_avg_rolling"
+  ]
+}
