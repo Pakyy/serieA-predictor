@@ -12,7 +12,7 @@ iniconfig==2.3.0
 joblib==1.5.2
 multidict==6.7.0
 numpy<2
-#packaging==25.0 # TODO: rimuovere se non serve
+packaging<24 # TODO: rimuovere se non serve
 pandas==2.3.3
 plotly==5.18.0
 pluggy==1.6.0
