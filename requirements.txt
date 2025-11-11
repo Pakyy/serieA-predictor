@@ -30,3 +30,5 @@ tzdata==2025.2
 understat==0.1.12
 urllib3==2.5.0
 yarl==1.22.0
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
