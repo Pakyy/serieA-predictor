@@ -9,6 +9,8 @@ import tempfile # Nuovo import
 from pathlib import Path # Già presente, ma assicuriamo
 from datetime import datetime
 from scipy.stats import poisson
+from supabase import create_client
+
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -32,18 +34,15 @@ from api.database import get_latest_team_stats, update_elo_cache
 # ============================================================
 
 def download_models_from_supabase():
-    """
-    Download models from Supabase Storage
-    Used in production (Render)
-    """
     print("🔄 Downloading models from Supabase Storage...")
     
-    # Assicurati che SUPABASE_URL sia presente nel .env o nell'ambiente
-    supabase_url = os.getenv('SUPABASE_URL')
-    if not supabase_url:
-        raise ValueError("SUPABASE_URL non è impostato nelle variabili d'ambiente.")
-        
-    base_url = f"{supabase_url}/storage/v1/object/public/models"
+    supabase_url = os.getenv("SUPABASE_URL")
+    supabase_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")  # chiave privata
+    
+    if not supabase_url or not supabase_key:
+        raise ValueError("SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY mancanti")
+    
+    supabase = create_client(supabase_url, supabase_key)
     
     model_files = [
         'model_home_goals_v1.pkl',
@@ -54,21 +53,18 @@ def download_models_from_supabase():
         'model_metadata_v1.json'
     ]
     
-    # Create temp directory
     temp_dir = Path(tempfile.mkdtemp())
     
     for filename in model_files:
-        url = f"{base_url}/{filename}"
-        response = requests.get(url)
+        print(f"🔄 Downloading {filename}...")
+        res = supabase.storage.from_("models").download(filename)
+        if res is None:
+            raise Exception(f"❌ Failed to download {filename}")
         
-        if response.status_code == 200:
-            filepath = temp_dir / filename
-            with open(filepath, 'wb') as f:
-                f.write(response.content)
-            print(f"  ✅ {filename}")
-        else:
-            print(f"  ❌ Failed to download {filename}: {response.status_code}")
-            raise Exception(f"Model download failed: {filename}")
+        filepath = temp_dir / filename
+        with open(filepath, "wb") as f:
+            f.write(res)
+        print(f"  ✅ {filename}")
     
     print("✅ All models downloaded")
     return temp_dir
