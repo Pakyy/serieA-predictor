@@ -9,6 +9,7 @@ coverage==7.11.0
 frozenlist==1.8.0
 idna==3.11
 iniconfig==2.3.0
+joblib==1.5.2
 multidict==6.7.0
 numpy==2.3.4
 packaging==25.0
@@ -23,6 +24,7 @@ pytest-mock==3.6.0
 python-dateutil==2.9.0.post0
 pytz==2025.2
 requests==2.32.5
+scikit-learn==1.7.2
 six==1.17.0
 soupsieve==2.8
 typing_extensions==4.15.0
