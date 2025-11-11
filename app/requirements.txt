@@ -11,10 +11,10 @@ idna==3.11
 iniconfig==2.3.0
 joblib==1.5.2
 multidict==6.7.0
-numpy==2.3.4
-packaging==25.0
+numpy<2
+packaging==25.0 # TODO: rimuovere se non serve
 pandas==2.3.3
-plotly==5.17.0
+plotly==5.18.0
 pluggy==1.6.0
 propcache==0.4.1
 pytest==7.2.0
@@ -25,16 +25,16 @@ pytest-mock==3.6.0
 python-dateutil==2.9.0.post0
 pytz==2025.2
 requests==2.32.5
-scikit-learn==1.7.2
+scikit-learn<1.5
 six==1.17.0
 soupsieve==2.8
-streamlit==1.28.0
-supabase==2.22.3
+streamlit>=1.30
+supabase>2.22.3
 typing_extensions==4.15.0
 tzdata==2025.2
-understat==0.1.12
+understat>0.1.12
 urllib3==2.5.0
-uvicorn[standard]==0.24.0
+uvicorn[standard]>0.23.0
 xgboost==3.1.1
 yarl==1.22.0
 fastapi==0.104.1
