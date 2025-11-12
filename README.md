@@ -86,8 +86,8 @@
 
 **Your Name**
 
-- LinkedIn: [your-profile](https://www.linkedin.com/in/pasquale-gravante-01075616b/)
-- GitHub: [@yourusername](https://github.com/Pakyy)
+- LinkedIn: [myprofile](https://www.linkedin.com/in/pasquale-gravante-01075616b/)
+- GitHub: [@pakyy](https://github.com/Pakyy)
 
 ---
 
