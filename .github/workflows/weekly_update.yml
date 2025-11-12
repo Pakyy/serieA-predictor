@@ -40,7 +40,7 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}  
         run: |
-          python upload_models_to_supabase.py
+          python data/upload_models_to_supabase.py
       
       - name: 📊 Summary
         if: success()
