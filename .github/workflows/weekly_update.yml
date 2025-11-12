@@ -1,0 +1,49 @@
+name: Weekly Data Update
+
+on:
+  schedule:
+    # Every Tuesday at 9 AM UTC (10 AM CET)
+    - cron: '0 9 * * TUE'
+  
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+      
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: 📦 Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: 🔄 Run update script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          python scripts/weekly_update.py
+      
+      - name: 📤 Upload models to Supabase
+        if: success()
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}  
+        run: |
+          python upload_models_to_supabase.py
+      
+      - name: 📊 Summary
+        if: success()
+        run: |
+          echo "✅ Data updated successfully"
+          echo "📅 Next run: Next Tuesday 9 AM UTC"
